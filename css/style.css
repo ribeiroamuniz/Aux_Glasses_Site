@@ -1,0 +1,158 @@
+body {
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  .logo {
+    width: 100px;
+    height: auto;
+  }
+  
+  .navbar {
+    height: 80px;
+  }
+  
+  .flex-grow-1 {
+    flex: 1;
+  }
+  
+  .modal-body img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .add-btn,
+  .play-btn {
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+  
+  .add-btn {
+    font-size: 30px;
+  }
+  
+  .modal-body input {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-bottom: 15px;
+  }
+  
+  .modal-body button {
+    background-color: #1c84ff;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .modal-body button:hover {
+    background-color: #145ec4;
+  }
+  
+  .modal-content {
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  #device-info {
+    display: none;
+  }
+  
+  #device-name {
+    font-size: 1.5rem;
+    color: #1c84ff;
+  }
+  
+  #last-location-time {
+    color: #888;
+  }
+  
+  .text-muted {
+    font-size: 14px;
+  }
+  
+  .text-center img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+  
+  /* Estilos para modal de boas-vindas */
+  #welcomeModal .modal-content {
+    background-color: white;
+    text-align: center;
+  }
+  
+  #welcomeModal .modal-header {
+    border-bottom: none;
+  }
+  
+  /* Botão de fechar */
+  .modal-header .btn-close {
+    background-color: #ccc;
+    padding: 5px;
+    border-radius: 50%;
+    font-size: 20px;
+  }
+  
+  .modal-header .btn-close:hover {
+    background-color: #999;
+  }
+  
+  /* Modais com alinhamento vertical */
+  .modal-dialog-centered {
+    display: flex;
+    align-items: center;
+  }
+  
+  .modal-dialog {
+    max-width: 500px;
+    margin: auto;
+  }
+  
+  /* Mapa responsivo */
+  .modal-lg iframe {
+    height: 450px;
+    width: 100%;
+  }
+  
+  /* Botão primário */
+  .btn-primary {
+    background-color: #1c84ff;
+    border: none;
+  }
+  
+  .btn-primary:hover {
+    background-color: #145ec4;
+  }
+  
+  /* Estilos adicionais para ícones */
+  .add-btn,
+  .play-btn {
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .add-btn:hover,
+  .play-btn:hover {
+    transform: scale(1.1);
+    transition: transform 0.2s;
+  }
+  
