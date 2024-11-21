@@ -55,23 +55,32 @@
   }
 
   /* Ajuste do texto abaixo da imagem */
-  #poxa-text {
-    text-align: center; /* Centraliza o texto */
-    font-size: 20px; /* Tamanho do texto */
-    margin-top: 10px; /* Espaço entre a imagem e o texto */
+  #poxa-img {
+    width: 120px; /* Ajuste o tamanho da imagem */
+    margin-right: 20px; /* Espaço entre a imagem e o botão */
   }
 
-  /* Botão "+" */
+  /* Estilo do botão "+" */
   .btn-add {
-    font-size: 40px;
+    font-size: 30px;
     width: 70px;
     height: 70px;
-    padding: 0;
-    border-radius: 50%; /* Redondo */
+    border-radius: 50%; /* Botão redondo */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    line-height: 70px; /* Centraliza o texto dentro do botão */
+  }
+
+  .btn-add:hover {
+    background-color: #0056b3; /* Cor ao passar o mouse */
+  }
+
+  /* Alinhar a imagem à esquerda e o botão à direita */
+  .btn-container {
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin: 30px auto; /* Centraliza e dá espaço abaixo do texto */
   }
 
     #device-history {
