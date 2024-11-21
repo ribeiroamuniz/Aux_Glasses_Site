@@ -3,12 +3,73 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome Screen</title>
+  <title>Auxiliary Glasses</title>
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map {
+      height: 400px; /* Altura do mapa no modal */
+    }
+
+    .device-info {
+      width: 100%;
+      height: 150px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #f0f0f0;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .device-name {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .play-btn {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    #add-device {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #poxa-image {
+      display: block;
+      margin-right: 10px; /* Adiciona espaço entre a imagem e o botão */
+    }
+
+    .btn-add {
+      font-size: 30px;
+      padding: 15px;
+      border-radius: 50%;
+    }
+
+    #device-history {
+      margin-top: 20px;
+      width: 80%;
+    }
+
+    /* Ajustando o tamanho da logo e da barra azul */
+    .navbar {
+      padding: 0.5rem 1rem;
+    }
+
+    .logo {
+      height: 40px; /* Tamanho da logo ajustado */
+    }
+  </style>
 </head>
 <body>
   <div class="container-fluid vh-100 d-flex flex-column">
@@ -19,44 +80,20 @@
 
     <!-- Main Content -->
     <div class="flex-grow-1 d-flex flex-column justify-content-center align-items-center">
-      <div id="device-info" class="d-none text-center">
-        <p id="device-name" class="fs-4 fw-bold text-primary"></p>
-        <p id="last-location-time" class="fs-6 text-muted"></p>
-        <button class="btn btn-primary rounded-circle play-btn">
-          ▶
-        </button>
-      </div>
-
       <div id="add-device" class="text-center">
-        <img src="../assets/Poxa!.png" alt="Poxa" class="img-fluid mb-4">
-        <button class="btn btn-primary rounded-circle add-btn">
+        <img src="../assets/Poxa!.png" alt="Poxa" class="img-fluid mb-4" id="poxa-image">
+        <button
+          class="btn btn-primary btn-add"
+          data-bs-toggle="modal"
+          data-bs-target="#inputModal"
+        >
           +
         </button>
       </div>
-    </div>
-  </div>
 
-  <!-- Welcome Modal -->
-  <div
-    class="modal fade"
-    id="welcomeModal"
-    tabindex="-1"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body text-center">
-          <img src="ImgWelcome.png" alt="Welcome" class="img-fluid mb-4">
-          <img src="manYdog.png" alt="Man with Dog" class="img-fluid">
-        </div>
+      <!-- Histórico de dispositivos -->
+      <div id="device-history">
+        <!-- Dispositivos serão listados aqui -->
       </div>
     </div>
   </div>
@@ -84,8 +121,9 @@
             type="text"
             class="form-control mb-3"
             placeholder="Código do dispositivo"
+            id="device-code"
           />
-          <button class="btn btn-primary">Confirmar</button>
+          <button class="btn btn-primary" id="confirm-device-btn">Confirmar</button>
         </div>
       </div>
     </div>
@@ -104,28 +142,21 @@
           <button
             type="button"
             class="btn-close"
-            data-bs-dismiss="modal"
             aria-label="Close"
+            onclick="closeMapAndOpenNameDeviceModal()"
           ></button>
         </div>
         <div class="modal-body p-0">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.835434509524!2d-122.4324!3d37.78825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808f7e2eaf68b32d%3A0x4d1c18e3a3d1f308!2sSan%20Francisco%20Bay!5e0!3m2!1sen!2sus!4v1635731048734!5m2!1sen!2sus"
-            width="100%"
-            height="450"
-            style="border:0;"
-            allowfullscreen=""
-            loading="lazy"
-          ></iframe>
+          <div id="map"></div> <!-- O mapa será carregado aqui -->
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Device Name Modal -->
+  <!-- Name Device Modal -->
   <div
     class="modal fade"
-    id="nameModal"
+    id="nameDeviceModal"
     tabindex="-1"
     aria-hidden="true"
   >
@@ -140,18 +171,122 @@
           ></button>
         </div>
         <div class="modal-body text-center">
-          <p>Digite o nome do dispositivo:</p>
+          <p>Informe o nome do dispositivo:</p>
           <input
             type="text"
             class="form-control mb-3"
             placeholder="Nome do dispositivo"
+            id="device-name"
           />
-          <button class="btn btn-primary">Salvar</button>
+          <button class="btn btn-primary" id="save-device-name-btn">Salvar</button>
         </div>
       </div>
     </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    // Função para exibir o mapa no modal
+    function showMap(latitude, longitude) {
+      const map = L.map('map').setView([latitude, longitude], 18); // Inicializa o mapa
+
+      // Define o tileLayer com o OpenStreetMap
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+
+      // Adiciona o marcador
+      L.marker([latitude, longitude]).addTo(map)
+        .bindPopup('Você está aqui!')
+        .openPopup();
+
+      // Exibe o modal com o mapa
+      const mapModal = new bootstrap.Modal(document.getElementById('mapModal'));
+      mapModal.show();
+    }
+
+    // Função para obter a localização e mostrar o mapa
+    function getLocationAndShowMap() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          function (position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            showMap(latitude, longitude); // Mostra o mapa
+          },
+          function (error) {
+            alert("Não foi possível obter a localização.");
+          }
+        );
+      } else {
+        alert("Geolocalização não é suportada neste navegador.");
+      }
+    }
+
+    // Função para abrir o modal de nomear o dispositivo
+    function openNameDeviceModal() {
+      const nameDeviceModal = new bootstrap.Modal(document.getElementById('nameDeviceModal'));
+      nameDeviceModal.show();
+    }
+
+    // Função para fechar o modal do mapa e abrir o modal de nomear o dispositivo
+    function closeMapAndOpenNameDeviceModal() {
+      // Fecha o modal de mapa
+      const mapModal = bootstrap.Modal.getInstance(document.getElementById('mapModal'));
+      mapModal.hide();
+
+      // Abre o modal de nomear o dispositivo
+      openNameDeviceModal();
+    }
+
+    // Função para salvar o nome do dispositivo
+    document.getElementById('save-device-name-btn').addEventListener('click', function () {
+      const deviceName = document.getElementById('device-name').value;
+      if (deviceName) {
+        // Fecha o modal de nomear dispositivo
+        const nameDeviceModal = bootstrap.Modal.getInstance(document.getElementById('nameDeviceModal'));
+        nameDeviceModal.hide();
+
+        // Esconde a imagem "Poxa"
+        document.getElementById('poxa-image').style.display = 'none';
+
+        // Adiciona o dispositivo ao histórico
+        const deviceHistory = document.getElementById('device-history');
+        const deviceItem = document.createElement('div');
+        deviceItem.classList.add('device-info');
+        deviceItem.innerHTML = `
+          <span class="device-name">${deviceName}</span>
+          <button class="play-btn" onclick="playDevice('${deviceName}')">Play</button>
+        `;
+        deviceHistory.appendChild(deviceItem);
+
+        // Exibe o nome do dispositivo e o botão Play
+        alert(`Dispositivo "${deviceName}" adicionado ao histórico.`);
+      } else {
+        alert("Por favor, informe o nome do dispositivo.");
+      }
+    });
+
+    // Função para "tocar" o dispositivo
+    function playDevice(deviceName) {
+      alert(`Reproduzindo o dispositivo: ${deviceName}`);
+      getLocationAndShowMap(); // Abre o mapa novamente ao clicar no play
+    }
+
+    // Adiciona evento para o botão "Confirmar" (código 002)
+    document.getElementById('confirm-device-btn').addEventListener('click', function () {
+      const deviceCode = document.getElementById('device-code').value;
+      if (deviceCode === '002') {
+        // Fecha o modal de entrada
+        const inputModal = bootstrap.Modal.getInstance(document.getElementById('inputModal'));
+        inputModal.hide();
+        // Obtém e exibe o mapa
+        getLocationAndShowMap();
+      } else {
+        alert("Código inválido. Apenas o código '002' é aceito.");
+      }
+    });
+  </script>
 </body>
 </html>
