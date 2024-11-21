@@ -4,7 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Auxiliary Glasses</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>
     #map {
@@ -79,7 +82,11 @@
     <div class="flex-grow-1 d-flex flex-column justify-content-center align-items-center">
       <div id="add-device" class="text-center">
         <img src="../assets/Poxa!.png" alt="Poxa" class="img-fluid mb-4" id="poxa-image">
-        <button class="btn btn-primary btn-add" data-bs-toggle="modal" data-bs-target="#inputModal">
+        <button
+          class="btn btn-primary btn-add"
+          data-bs-toggle="modal"
+          data-bs-target="#inputModal"
+        >
           +
         </button>
       </div>
@@ -92,15 +99,30 @@
   </div>
 
   <!-- Input Modal -->
-  <div class="modal fade" id="inputModal" tabindex="-1" aria-hidden="true">
+  <div
+    class="modal fade"
+    id="inputModal"
+    tabindex="-1"
+    aria-hidden="true"
+  >
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
         </div>
         <div class="modal-body text-center">
           <p>Informe abaixo o código do aparelho:</p>
-          <input type="text" class="form-control mb-3" placeholder="Código do dispositivo" id="device-code" />
+          <input
+            type="text"
+            class="form-control mb-3"
+            placeholder="Código do dispositivo"
+            id="device-code"
+          />
           <button class="btn btn-primary" id="confirm-device-btn">Confirmar</button>
         </div>
       </div>
@@ -108,11 +130,21 @@
   </div>
 
   <!-- Map Modal -->
-  <div class="modal fade" id="mapModal" tabindex="-1" aria-hidden="true">
+  <div
+    class="modal fade"
+    id="mapModal"
+    tabindex="-1"
+    aria-hidden="true"
+  >
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="btn-close" aria-label="Close" onclick="closeMapAndOpenNameDeviceModal()"></button>
+          <button
+            type="button"
+            class="btn-close"
+            aria-label="Close"
+            onclick="closeMapAndOpenNameDeviceModal()"
+          ></button>
         </div>
         <div class="modal-body p-0">
           <div id="map"></div> <!-- O mapa será carregado aqui -->
@@ -122,15 +154,30 @@
   </div>
 
   <!-- Name Device Modal -->
-  <div class="modal fade" id="nameDeviceModal" tabindex="-1" aria-hidden="true">
+  <div
+    class="modal fade"
+    id="nameDeviceModal"
+    tabindex="-1"
+    aria-hidden="true"
+  >
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
         </div>
         <div class="modal-body text-center">
           <p>Informe o nome do dispositivo:</p>
-          <input type="text" class="form-control mb-3" placeholder="Nome do dispositivo" id="device-name" />
+          <input
+            type="text"
+            class="form-control mb-3"
+            placeholder="Nome do dispositivo"
+            id="device-name"
+          />
           <button class="btn btn-primary" id="save-device-name-btn">Salvar</button>
         </div>
       </div>
@@ -223,17 +270,21 @@
 
     // Função para "tocar" o dispositivo
     function playDevice(deviceName) {
-      alert(`Tocando dispositivo: ${deviceName}`);
+      alert(`Reproduzindo o dispositivo: ${deviceName}`);
+      getLocationAndShowMap(); // Abre o mapa novamente ao clicar no play
     }
 
-    // Confirmação do código
-    document.getElementById("confirm-device-btn").addEventListener("click", function () {
-      const code = document.getElementById("device-code").value;
-      if (code === "002") {
-        // Abre o mapa assim que o código for correto
+    // Adiciona evento para o botão "Confirmar" (código 002)
+    document.getElementById('confirm-device-btn').addEventListener('click', function () {
+      const deviceCode = document.getElementById('device-code').value;
+      if (deviceCode === '002') {
+        // Fecha o modal de entrada
+        const inputModal = bootstrap.Modal.getInstance(document.getElementById('inputModal'));
+        inputModal.hide();
+        // Obtém e exibe o mapa
         getLocationAndShowMap();
       } else {
-        alert("Código inválido. Por favor, insira o código correto.");
+        alert("Código inválido.");
       }
     });
   </script>
