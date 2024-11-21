@@ -41,20 +41,27 @@
 
     #add-device {
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
+      margin-top: -50px; /* Move o container mais para cima */
     }
 
     #poxa-image {
       display: block;
-      margin-top: 10px;
-      margin-right: 10px; /* Adiciona espaço entre a imagem e o botão */
+      margin-bottom: 10px; /* Espaço entre a imagem e o botão */
+      width: 80px; /* Reduz o tamanho da imagem */
     }
 
     .btn-add {
-      font-size: 30px;
-      padding: 15px;
-      border-radius: 50%;
+      font-size: 50px; /* Aumenta o tamanho do ícone "+" */
+      width: 80px; /* Largura igual à altura */
+      height: 80px; /* Altura igual à largura */
+      padding: 0;
+      border-radius: 50%; /* Botão redondo */
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     #device-history {
@@ -62,27 +69,29 @@
       width: 80%;
     }
 
-    /* Ajustando o tamanho da logo e da barra azul */
+    /* Ajustando a barra azul e a logo */
     .navbar {
-      padding: 2rem;
+      padding: 1rem; /* Mantém altura fixa */
+      background-color: #007bff;
+      width: 100%; /* Corrige corte na largura */
     }
 
     .logo {
-      height: 40px; /* Tamanho da logo ajustado */
+      height: 100px; /* Aumenta o tamanho da logo */
     }
   </style>
 </head>
 <body>
   <div class="container-fluid vh-100 d-flex flex-column">
     <!-- Navbar -->
-    <nav class="navbar bg-primary d-flex justify-content-between px-1">
+    <nav class="navbar d-flex justify-content-between px-1">
       <img src="../assets/logoTwo.png" alt="Logo" class="logo">
     </nav>
 
     <!-- Main Content -->
     <div class="flex-grow-1 d-flex flex-column justify-content-center align-items-center">
       <div id="add-device" class="text-center">
-        <img src="../assets/Poxa!.png" alt="Poxa" class="img-fluid mb-4" id="poxa-image">
+        <img src="../assets/Poxa!.png" alt="Poxa" class="img-fluid" id="poxa-image">
         <button
           class="btn btn-primary btn-add"
           data-bs-toggle="modal"
@@ -187,107 +196,5 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script>
-    // Função para exibir o mapa no modal
-    function showMap(latitude, longitude) {
-      const map = L.map('map').setView([latitude, longitude], 18); // Inicializa o mapa
-
-      // Define o tileLayer com o OpenStreetMap
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      }).addTo(map);
-
-      // Adiciona o marcador
-      L.marker([latitude, longitude]).addTo(map)
-        .bindPopup('Você está aqui!')
-        .openPopup();
-
-      // Exibe o modal com o mapa
-      const mapModal = new bootstrap.Modal(document.getElementById('mapModal'));
-      mapModal.show();
-    }
-
-    // Função para obter a localização e mostrar o mapa
-    function getLocationAndShowMap() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          function (position) {
-            const latitude = position.coords.latitude;
-            const longitude = position.coords.longitude;
-            showMap(latitude, longitude); // Mostra o mapa
-          },
-          function (error) {
-            alert("Não foi possível obter a localização.");
-          }
-        );
-      } else {
-        alert("Geolocalização não é suportada neste navegador.");
-      }
-    }
-
-    // Função para abrir o modal de nomear o dispositivo
-    function openNameDeviceModal() {
-      const nameDeviceModal = new bootstrap.Modal(document.getElementById('nameDeviceModal'));
-      nameDeviceModal.show();
-    }
-
-    // Função para fechar o modal do mapa e abrir o modal de nomear o dispositivo
-    function closeMapAndOpenNameDeviceModal() {
-      // Fecha o modal de mapa
-      const mapModal = bootstrap.Modal.getInstance(document.getElementById('mapModal'));
-      mapModal.hide();
-
-      // Abre o modal de nomear o dispositivo
-      openNameDeviceModal();
-    }
-
-    // Função para salvar o nome do dispositivo
-    document.getElementById('save-device-name-btn').addEventListener('click', function () {
-      const deviceName = document.getElementById('device-name').value;
-      if (deviceName) {
-        // Fecha o modal de nomear dispositivo
-        const nameDeviceModal = bootstrap.Modal.getInstance(document.getElementById('nameDeviceModal'));
-        nameDeviceModal.hide();
-
-        // Esconde a imagem "Poxa"
-        document.getElementById('poxa-image').style.display = 'none';
-
-        // Adiciona o dispositivo ao histórico
-        const deviceHistory = document.getElementById('device-history');
-        const deviceItem = document.createElement('div');
-        deviceItem.classList.add('device-info');
-        deviceItem.innerHTML = `
-          <span class="device-name">${deviceName}</span>
-          <button class="play-btn" onclick="playDevice('${deviceName}')">Play</button>
-        `;
-        deviceHistory.appendChild(deviceItem);
-
-        // Exibe o nome do dispositivo e o botão Play
-        alert(`Dispositivo "${deviceName}" adicionado ao histórico.`);
-      } else {
-        alert("Por favor, informe o nome do dispositivo.");
-      }
-    });
-
-    // Função para "tocar" o dispositivo
-    function playDevice(deviceName) {
-      alert(`Reproduzindo o dispositivo: ${deviceName}`);
-      getLocationAndShowMap(); // Abre o mapa novamente ao clicar no play
-    }
-
-    // Adiciona evento para o botão "Confirmar" (código 002)
-    document.getElementById('confirm-device-btn').addEventListener('click', function () {
-      const deviceCode = document.getElementById('device-code').value;
-      if (deviceCode === '002') {
-        // Fecha o modal de entrada
-        const inputModal = bootstrap.Modal.getInstance(document.getElementById('inputModal'));
-        inputModal.hide();
-        // Obtém e exibe o mapa
-        getLocationAndShowMap();
-      } else {
-        alert("Código inválido.");
-      }
-    });
-  </script>
 </body>
 </html>
