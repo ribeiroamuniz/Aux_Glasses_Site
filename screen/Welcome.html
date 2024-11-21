@@ -15,35 +15,39 @@
     }
 
     .device-info {
-      width: 100%;
-      height: 150px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #f0f0f0;
-      padding: 10px;
-      border-radius: 5px;
-      margin-bottom: 10px;
-    }
+  width: 100%;
+  height: 150px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
 
-    .device-name {
-      font-size: 20px;
-      font-weight: bold;
-    }
+.device-name {
+  font-size: 20px;
+  font-weight: bold;
+}
 
-    .play-btn {
-      background-color: #007bff;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 5px;
-      border: none;
-    }
+.play-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
 
-    #add-device {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+.play-btn:hover {
+  background-color: #0056b3;
+}
+
+.device-info .play-btn {
+  transition: background-color 0.3s;
+}
 
     #poxa-image {
       display: block;
