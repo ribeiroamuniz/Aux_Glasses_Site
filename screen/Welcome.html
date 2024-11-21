@@ -20,7 +20,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background-color: #f0f0f0;
+      background-color: #ffffff; /* Retângulo branco */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
       padding: 10px;
       border-radius: 5px;
       margin-bottom: 10px;
@@ -43,17 +44,42 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-top: -50px; /* Move o container mais para cima */
+      transition: margin-top 0.3s ease; /* Transição suave ao mover */
     }
 
-    #poxa-image {
-      display: block;
-      margin-right: 10px; /* Adiciona espaço entre a imagem e o botão */
+    /* Estilo da imagem com tamanho maior */
+    #poxa-img {
+      width: 500px; /* Tamanho maior da imagem */
+      margin-right: 20px; /* Espaço entre a imagem e o botão */
+      vertical-align: middle; /* Alinha a imagem verticalmente no meio */
+      transition: transform 0.3s ease; /* Transição suave ao mover */
     }
 
+    /* Estilo do botão "+" */
     .btn-add {
-      font-size: 30px;
-      padding: 15px;
-      border-radius: 50%;
+      font-size: 35px; /* Aumento do tamanho do "+" */
+      width: 80px;
+      height: 80px;
+      border-radius: 50%; /* Botão redondo */
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      line-height: 80px; /* Centraliza o texto dentro do botão */
+      text-align: center; /* Garante que o "+" ficará centralizado */
+      transition: transform 0.3s ease; /* Transição suave ao mover */
+    }
+
+    .btn-add:hover {
+      background-color: #0056b3; /* Cor ao passar o mouse */
+    }
+
+    /* Contêiner para alinhar imagem e botão na mesma linha */
+    .btn-container {
+      display: flex;
+      align-items: center; /* Alinha a imagem e o botão verticalmente no centro */
+      transition: transform 0.3s ease; /* Transição suave ao mover */
     }
 
     #device-history {
@@ -61,13 +87,15 @@
       width: 80%;
     }
 
-    /* Ajustando o tamanho da logo e da barra azul */
+    /* Ajustando a barra azul e a logo */
     .navbar {
-      padding: 0.5rem 1rem;
+      padding: 1rem; /* Mantém altura fixa */
+      background-color: #007bff;
+      width: 100%; /* Corrige corte na largura */
     }
 
     .logo {
-      height: 40px; /* Tamanho da logo ajustado */
+      height: 100px; /* Aumenta o tamanho da logo */
     }
   </style>
 </head>
