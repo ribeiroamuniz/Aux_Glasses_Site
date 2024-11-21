@@ -73,16 +73,11 @@
       <input type="password" class="form-control" id="confirmPassword" placeholder="Confirmar Senha" required />
       <button type="submit" class="btn btn-custom">Próximo</button>
     </form>
-    <!-- Link para a página de boas-vindas, inicialmente oculto -->
-    <div id="success-message">
-      <a href="./Welcome.html" class="btn btn-success">Cadastro realizado com sucesso! Vá para a página de boas-vindas</a>
-    </div>
   </div>
 
   <script>
     // Captura o formulário de cadastro
     const form = document.getElementById('registerForm');
-    const successMessage = document.getElementById('success-message');
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault(); // Impede o envio tradicional do formulário
@@ -123,11 +118,11 @@
         const result = await response.json();
 
         if (response.ok) {
-          // Se o cadastro for bem-sucedido, exibe o link para a página de boas-vindas
-          successMessage.style.display = 'block'; // Exibe o link
+          // Se o cadastro for bem-sucedido, redireciona para a página de boas-vindas
+          window.location.href = './Welcome.html';
         } else {
           // Caso haja erro no cadastro
-          alert('Erro ao registrar: ' + result.error || result.message);
+          alert('Erro ao registrar: ' + (result.error || result.message));
         }
       } catch (error) {
         alert('Erro na conexão com o servidor: ' + error.message);
