@@ -41,41 +41,39 @@
 
     #add-device {
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       margin-top: -50px; /* Move o container mais para cima */
     }
 
+    /* Ajusta o tamanho da imagem "Poxa" */
     #poxa-img {
-    width: 250px; /* Tamanho maior da imagem */
-    margin-right: 20px; /* Espaço entre a imagem e o botão */
-    vertical-align: middle; /* Alinha a imagem verticalmente no meio */
-  }
+      width: 150px; /* Tamanho menor da imagem */
+      margin-right: 20px; /* Espaço entre a imagem e o botão */
+    }
 
-  /* Estilo do botão "+" */
-  .btn-add {
-    font-size: 30px;
-    width: 70px;
-    height: 70px;
-    border-radius: 50%; /* Botão redondo */
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-    line-height: 70px; /* Centraliza o texto dentro do botão */
-  }
+    /* Estilo do botão "+" */
+    .btn-add {
+      font-size: 30px;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%; /* Botão redondo */
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      line-height: 70px; /* Centraliza o texto dentro do botão */
+    }
 
-  .btn-add:hover {
-    background-color: #0056b3; /* Cor ao passar o mouse */
-  }
+    .btn-add:hover {
+      background-color: #0056b3; /* Cor ao passar o mouse */
+    }
 
-  /* Contêiner para alinhar imagem e botão na mesma linha */
-  .btn-container {
-    display: flex;
-    align-items: center; /* Alinha a imagem e o botão verticalmente no centro */
-  }
-
+    /* Contêiner para alinhar imagem e botão na mesma linha */
+    .btn-container {
+      display: flex;
+      align-items: center; /* Alinha a imagem e o botão verticalmente no centro */
+    }
 
     #device-history {
       margin-top: 20px;
@@ -103,8 +101,8 @@
 
     <!-- Main Content -->
     <div class="flex-grow-1 d-flex flex-column justify-content-center align-items-center">
-      <div id="add-device" class="text-center">
-        <img src="../assets/Poxa!.png" alt="Poxa" class="img-fluid" id="poxa-image">
+      <div id="add-device" class="text-center btn-container">
+        <img src="../assets/Poxa!.png" alt="Poxa" id="poxa-img">
         <button
           class="btn btn-primary btn-add"
           data-bs-toggle="modal"
