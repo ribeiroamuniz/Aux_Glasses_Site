@@ -20,7 +20,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background-color: #f0f0f0;
+      background-color: #ffffff; /* Retângulo branco */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
       padding: 10px;
       border-radius: 5px;
       margin-bottom: 10px;
@@ -44,6 +45,7 @@
       align-items: center;
       justify-content: center;
       margin-top: -50px; /* Move o container mais para cima */
+      transition: margin-top 0.3s ease; /* Transição suave ao mover */
     }
 
     /* Estilo da imagem com tamanho maior */
@@ -51,6 +53,7 @@
       width: 500px; /* Tamanho maior da imagem */
       margin-right: 20px; /* Espaço entre a imagem e o botão */
       vertical-align: middle; /* Alinha a imagem verticalmente no meio */
+      transition: transform 0.3s ease; /* Transição suave ao mover */
     }
 
     /* Estilo do botão "+" */
@@ -65,6 +68,7 @@
       cursor: pointer;
       line-height: 80px; /* Centraliza o texto dentro do botão */
       text-align: center; /* Garante que o "+" ficará centralizado */
+      transition: transform 0.3s ease; /* Transição suave ao mover */
     }
 
     .btn-add:hover {
@@ -75,6 +79,7 @@
     .btn-container {
       display: flex;
       align-items: center; /* Alinha a imagem e o botão verticalmente no centro */
+      transition: transform 0.3s ease; /* Transição suave ao mover */
     }
 
     #device-history {
@@ -235,6 +240,11 @@
           <button class="btn btn-primary play-btn">Play</button>
         `;
         deviceHistory.appendChild(deviceInfo);
+
+        // Subir a imagem, o botão e o container
+        document.getElementById("add-device").style.marginTop = "-200px";  // Move para cima
+        document.getElementById("poxa-img").style.transform = "translateY(-150px)";  // Sobe a imagem
+        document.querySelector(".btn-container").style.transform = "translateY(-150px)";  // Sobe o botão
 
         // Fecha o modal de nome do dispositivo
         var nameDeviceModal = bootstrap.Modal.getInstance(document.getElementById("nameDeviceModal"));
