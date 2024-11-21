@@ -47,7 +47,13 @@
       margin-top: -50px; /* Move o container mais para cima */
     }
 
-  /* Ajustes para a imagem "Poxa!" */
+    #poxa-img {
+    width: 250px; /* Tamanho maior da imagem */
+    margin-right: 20px; /* Espaço entre a imagem e o botão */
+    vertical-align: middle; /* Alinha a imagem verticalmente no meio */
+  }
+
+  /* Estilo do botão "+" */
   .btn-add {
     font-size: 30px;
     width: 70px;
@@ -64,11 +70,11 @@
     background-color: #0056b3; /* Cor ao passar o mouse */
   }
 
-  /* Alinhar a imagem à esquerda e o botão à direita */
+  /* Alinha a imagem à esquerda e o botão à direita, na mesma linha */
   .btn-container {
     display: flex;
-    justify-content: flex-start; /* Alinha à esquerda */
-    align-items: center; /* Alinha verticalmente a imagem e o botão */
+    align-items: center; /* Alinha a imagem e o botão verticalmente no meio */
+    justify-content: flex-start; /* Garante que o conteúdo fica à esquerda */
   }
 
 
